@@ -8,7 +8,6 @@
 - Sidebar Navigation
 - Profile Page
 - Product Modal
-- Favorites Feature
 - Responsive Design
 
 ## Tech Stack
