@@ -1,22 +1,26 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { login } from '../redux/userSlice';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "../redux/userSlice";
 import { useForm } from "react-hook-form";
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: {errors}} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const onSubmit = (data) => {
     // e.preventDefault();
-      dispatch(login({ username: data.username }));
-      navigate('/products');
+    dispatch(login({ username: data.username }));
+    navigate("/products");
   };
-
 
   return (
     <div className="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
@@ -31,18 +35,21 @@ function Login() {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
-            <label className="form-label fw-semibold">Username or Email Address</label>
+            <label className="form-label fw-semibold">
+              Username or Email Address
+            </label>
             <input
               type="text"
-              className={`form-control p-2 ${errors.username ?  'is-invalid' : ''}`}
+              className={`form-control p-2 ${errors.username ? "is-invalid" : ""}`}
               placeholder="Enter username or email"
-              {...register("username", { required: "Username or Email is required",})}
+              autoComplete="off"
+              {...register("username", {
+                required: "Username or Email is required",
+              })}
             />
-              {errors.username && (
-                  <div className="invalid-feedback">
-                    {errors.username.message}
-                  </div>
-                )}
+            {errors.username && (
+              <div className="invalid-feedback">{errors.username.message}</div>
+            )}
           </div>
 
           <div className="mb-5">
@@ -52,48 +59,23 @@ function Login() {
               className={`form-control p-2 ${errors.password ? "is-invalid" : ""}`}
               placeholder="Enter your password"
               {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 6,
-                      message:
-                        "Password must be at least 6 characters",
-                    },
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
               })}
             />
-              {errors.password && (
-                  <div className="invalid-feedback">
-                    {errors.password.message}
-                  </div>
-                )}
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password.message}</div>
+            )}
           </div>
 
-          {/* <div className="d-flex justify-content-between mb-3">
-            <div>
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember" className="ms-2">
-                Remember me
-              </label>
-            </div>
-
-            <a href="/" className="text-decoration-none">
-              Forgot Password?
-            </a>
-          </div> */}
-
-          <button className="btn btn-primary w-100 py-2">
-            Login
-          </button>
+          <button className="btn btn-primary w-100 py-2">Login</button>
         </form>
-{/* 
-        <p className="text-center mt-4 mb-0">
-          Don’t have an account?{" "}
-          <a href="/" className="text-decoration-none fw-bold">
-            Sign Up
-          </a>
-        </p> */}
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

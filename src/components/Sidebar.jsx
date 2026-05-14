@@ -1,19 +1,9 @@
 import React, { useState } from "react";
-
-import { Link,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/userSlice";
 
 function Sidebar() {
-
   const [showSidebar, setShowSidebar] = useState(false);
 
   const { user } = useSelector((state) => state.user);
@@ -34,9 +24,7 @@ function Sidebar() {
   };
 
   const getPageTitle = () => {
-
     switch (location.pathname) {
-
       case "/products":
         return "Product List";
 
@@ -50,7 +38,6 @@ function Sidebar() {
 
   return (
     <>
-      {/* Navbar */}
       <nav
         className="navbar navbar-light bg-white shadow-sm px-3"
         style={{
@@ -62,9 +49,7 @@ function Sidebar() {
           zIndex: 1000,
         }}
       >
-
         <div className="d-flex align-items-center gap-3">
-
           <button
             className="btn btn-light border"
             onClick={() => setShowSidebar(true)}
@@ -72,21 +57,15 @@ function Sidebar() {
             ☰
           </button>
 
-          <h4 className="mb-0 fw-bold">
-            {getPageTitle()}
-          </h4>
-
+          <h4 className="mb-0 fw-bold">{getPageTitle()}</h4>
         </div>
 
         <div className="fw-semibold text-secondary">
           {"SafeStart Assessment"}
         </div>
-
       </nav>
 
-      {/* Overlay */}
       {showSidebar && (
-
         <div
           onClick={() => setShowSidebar(false)}
           style={{
@@ -99,40 +78,35 @@ function Sidebar() {
             zIndex: 998,
           }}
         ></div>
-
       )}
 
-      {/* Sidebar */}
-    <div
-    style={{
-        width: "280px",
-        height: "calc(100vh - 70px)",
-        background: "#ffffff",
-        position: "fixed",
-        top: "70px",
-        left: showSidebar ? "0" : "-300px",
-        transition: "0.3s ease",
-        zIndex: 1200,
-        boxShadow: "0 0 20px rgba(0,0,0,0.1)",
-        padding: "20px",
-        overflowY: "auto",
-    }}
-    >
-        {/* Header */}
+      <div
+        style={{
+          width: "280px",
+          height: "calc(100vh - 70px)",
+          background: "#ffffff",
+          position: "fixed",
+          top: "70px",
+          left: showSidebar ? "0" : "-300px",
+          transition: "0.3s ease",
+          zIndex: 1200,
+          boxShadow: "0 0 20px rgba(0,0,0,0.1)",
+          padding: "20px",
+          overflowY: "auto",
+        }}
+      >
         <div className="d-flex justify-content-between align-items-center mb-2">
-
-          {/* Close Button */}
-          <button  type="button" class="btn-close" aria-label="Close"
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
             onClick={() => setShowSidebar(false)}
             style={{
-                marginLeft:'13rem'
+              marginLeft: "13rem",
             }}
-          >
-          </button>
-
+          ></button>
         </div>
 
-        {/* User Details */}
         <div
           className="p-3 mb-4"
           style={{
@@ -140,10 +114,7 @@ function Sidebar() {
             borderRadius: "12px",
           }}
         >
-
-          <h5>
-            👤 {user?.name || "User"}
-          </h5>
+          <h5>👤 {user?.name || "User"}</h5>
 
           <p
             className="mb-0"
@@ -154,12 +125,9 @@ function Sidebar() {
           >
             {user?.email || "No Email"}
           </p>
-
         </div>
 
-        {/* Menu Items */}
         <div className="d-flex flex-column gap-2">
-
           <Link
             to="/products"
             onClick={handleMenuClick}
@@ -183,21 +151,13 @@ function Sidebar() {
           >
             👤 Profile Page
           </Link>
-
         </div>
 
-        {/* Logout */}
         <div className="mt-4">
-
-            <button
-                className="btn btn-danger w-100"
-                onClick={handleLogout}
-            >
-                Logout
-            </button>
-
+          <button className="btn btn-danger w-100" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
-
       </div>
     </>
   );
